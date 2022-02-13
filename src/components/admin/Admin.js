@@ -10,7 +10,7 @@ const AdminScreen = ()=>{
         nombre: "",
         descripcion: "",
         stock: 0,
-        valor: 0.0
+        valor: 0.0,
     });
 
     const {token} = useSelector(state=>state.auth);
@@ -31,7 +31,7 @@ const AdminScreen = ()=>{
             <h1>Agregar productos</h1>
             <div className='form'>
                 <form onSubmit={handleSubmit}>
-                    <label forHTML="nombre">Nombre</label>
+                    <label htmlFor="nombre">Nombre</label>
                     <input 
                         onChange={handleChange}
                         value={values.nombre}
@@ -41,7 +41,7 @@ const AdminScreen = ()=>{
                         placeholder='Nombre del producto'
                         required={true}
                     />
-                    <label forHTML="descripcion">Descripción</label>
+                    <label htmlFor="descripcion">Descripción</label>
                     <textarea
                         onChange={handleChange}
                         value={values.descripcion}
@@ -50,7 +50,7 @@ const AdminScreen = ()=>{
                         placeholder='Descripción'
                     />
                     <div className="extra-input">
-                        <label forHTML="stock">Stock: </label>
+                        <label htmlFor="stock">Stock: </label>
                         <input 
                             onChange={handleChange}
                             value={values.stock}
@@ -61,7 +61,7 @@ const AdminScreen = ()=>{
                             min={0}
                             required={true}
                         />
-                        <label forHTML="valor">Precio: </label>
+                        <label htmlFor="valor">Precio: </label>
                         <input 
                             onChange={handleChange}
                             value={values.valor}
@@ -75,10 +75,18 @@ const AdminScreen = ()=>{
                         />
                         
                     </div>
-                    <label forHTML="imagen_url">Imágen: </label>
+                    <label htmlFor="imagen_url">Imágen: </label>
                     <input 
+                       
+                        onChange={(e)=>{
+                            console.log(e.target)
+                            handleChange({target: {
+                                name: e.target.name,
+                                value: e.target
+                            }});
+                        }}
                         type="file"
-                        name="imagen_url"
+                        name="imagen"
                     />
                     <input type="submit" value="Guardar Producto" />                </form>
             </div>

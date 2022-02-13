@@ -3,18 +3,22 @@ import { useDispatch } from 'react-redux';
 import {BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AdminScreen from '../components/admin/Admin';
 import EditProduct from '../components/admin/EditProd';
+import CarritoScreen from '../components/carrito/CarritoScreen';
 import HomeScreen from '../components/home/HomeScreen';
 import LoginScreen from '../components/home/LoginScreen';
+import RegisterScreen from '../components/home/RegisterScreen';
 import { setLoginData, startLogout } from '../redux/actions/auth';
 
 const privateRoutes = {
   home: "/home",
   admin: "/admin",
-  edit: "/edit"
+  edit: "/edit",
+  cart: "/cart"
 }
 
 const publicRoutes = {
-  login: "/"
+  login: "/",
+  register: "/registro"
 }
 
 const RouterComponent = ()=>{
@@ -32,8 +36,7 @@ const RouterComponent = ()=>{
     if(privateRoutes[value] === location) {    
       if(!token || !user) {
         dispatch( startLogout() );
-        console.log("arigatoo")
-        return <Navigate to="/" />;
+        window.location.href = "http://localhost:3000/";
       }
       else {
         dispatch( setLoginData(user, token) );
@@ -46,7 +49,8 @@ const RouterComponent = ()=>{
       if(token && user) {
         // me redirecciona al login
         dispatch( setLoginData(user, token) );
-        return <Navigate to="/home" />;
+        window.location.href = "http://localhost:3000/home";
+        return;
       }
     }
   }
@@ -58,6 +62,8 @@ const RouterComponent = ()=>{
         <Route exact path={privateRoutes.admin} element={<AdminScreen />} />
         <Route exact path={privateRoutes.home} element={<HomeScreen />} />
         <Route exact path={privateRoutes.edit} element={<EditProduct />} />
+        <Route exact path={privateRoutes.cart} element={<CarritoScreen />} />
+        <Route exact path={publicRoutes.register} element={<RegisterScreen />} />
       </Routes>
   </div>
 }

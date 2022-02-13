@@ -1,6 +1,19 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import {
+  faCartPlus
+} from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux';
+import { addItemCarrito } from '../../redux/actions/carrito';
+import Swal from 'sweetalert2';
 
-const ProductCard = ({prod})=>{
+const ProductCard = ({prod, showCart=true})=>{
+
+    const dispatch = useDispatch();
+
+    const handleClick = ()=>{
+        dispatch( addItemCarrito(prod) );
+    }
 
     return (
         <div className="product">
@@ -18,12 +31,27 @@ const ProductCard = ({prod})=>{
             <span className="price">
                 A tan solo <b>{`\$${prod['valor'] || '0.00'}`}</b>
             </span>
-            <small className="stock">
+            {/* <small className="stock">
                 {`${prod['stock'] || '0'}`} en stock
-            </small>
+            </small> */}
             <div className='btns'>
-                <button>Ver detalles</button>
-                <button>++</button>
+                <button
+                    onClick={()=>{
+                        Swal.fire({
+                            title: "Detalles del producto "+prod.nombre,
+                            text: prod.descripcion,
+                            onClose: ()=>Swal.close()
+                          });
+                    }}
+                >Ver detalles</button>
+                {
+                    showCart &&
+                    <a
+                        onClick={handleClick}            
+                    >
+                        <FontAwesomeIcon icon={faCartPlus} />
+                    </a>
+                }
             </div>
         </div>
     );

@@ -4,6 +4,8 @@ const types = {
   logout: "[auth] logout",
   fetchPro: "[products] fetch",
   addPro: "[products] add",
+  getCarrito: "[cart] get",
+  addCompra: "[cart] compra",
 }
 
 export default types;

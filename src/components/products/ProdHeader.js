@@ -25,12 +25,12 @@ const ProdHeaderComponent = ()=>{
                 >
                     Agregar producto
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                     to="/edit"
                     className={route==="/edit"?"activenode":""}
                 >
                     Editar Producto
-                </NavLink>
+                </NavLink> */}
           </ol>
       </nav>
     </div>

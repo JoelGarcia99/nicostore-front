@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80%;
+  
   width: 60%;
   padding: 2rem 1rem;
   background-color: #012E40;
@@ -54,6 +54,15 @@
   background-color: #DAFDBA;
   cursor: pointer;
   margin-top: 3rem;
+  width: auto;
+}
+
+.login-form form > button {
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #DAFDBA;
+  cursor: pointer;
   width: auto;
 }
 
@@ -91,9 +100,17 @@ div.header {
   }
 }
 
+
 .search .opt button {
-  display: block;
-  padding: 0.3rem 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  margin-right: 1rem;
+  border-radius: 0.6rem;
+  background-color: #012030;
+  border: none;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -118,5 +135,52 @@ div.header {
   font-size: 24px;
   margin: 0 1rem;
   font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+//////////////////////////////////////////@at-ro
+.cart-home {
+  display: flex;
+  align-items: start;
+  justify-content: space-evenly;
+  padding: 2rem;
+}
+
+.cart-d {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  width: 40vw;
+  align-self: center;
+  align-items: start;
+  padding: 1rem 2rem;
+  justify-content: start;
+  height: 100% !important;
+  border: 1px solid gray;
+  background-color: lighten($color: gray, $amount: 45);
+}
+
+.cart {
+  max-width: 50vw;
+  align-self: center;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 1rem 10rem;
+  border: 1px solid gray;
+  background-color: lighten($color: gray, $amount: 45);
+}
+
+.btnPay {
+  align-self: center;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  outline: none;
+  border: 1px solid blue;
   cursor: pointer;
 }

@@ -17,6 +17,10 @@ const ProductList = ()=>{
         return <h1>Loading...</h1>;
     }
 
+    if(products.length === 0) {
+        return <center><h2>No hay productos</h2></center>
+    }
+
     return (
         <div className="product-list">
             {

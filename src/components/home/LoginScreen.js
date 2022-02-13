@@ -44,6 +44,12 @@ const LoginScreen = ()=>{
 	    value={values.pass}
 	  />
 	  <input type="submit" value="Iniciar sesión" />
+	  <button
+      onClick={(e)=>{
+        e.preventDefault();
+        window.location.href = "http://localhost:3000/registro";
+      }}
+    >Registrarse</button>
         </form>
       </div>
     </div>

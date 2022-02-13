@@ -1,5 +1,6 @@
 import thunk from "redux-thunk";
 import {authReducer} from "../reducers/authReducer";
+import { carritoReducer } from "../reducers/carritoReducer";
 import { productReducer } from "../reducers/productReducer";
 
 const {combineReducers, createStore, applyMiddleware, compose} = require("redux");
@@ -10,7 +11,8 @@ const {combineReducers, createStore, applyMiddleware, compose} = require("redux"
 // time by default
 const reducers = combineReducers({
   auth: authReducer,
-  prod: productReducer
+  prod: productReducer,
+  cart: carritoReducer,
 });
 
 

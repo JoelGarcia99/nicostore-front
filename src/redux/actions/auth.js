@@ -4,22 +4,13 @@ import types from "../types";
 export const startLogin = (email, pass)=>{
   return async(dispatch)=>{
 
-    // Swal.fire({
-    //   showConfirmButton: false,
-    //   allowEscapeKey: false,
-    //   allowOutsideClick: false,
-    //   onBeforeOpen: ()=>{
-	// Swal.showLoading()
-    //   }
-    // });
-
     const res = await fetch(`http://localhost:8500/user/login`, {
       method: 'POST',
       body: new URLSearchParams({
-	email, pass
+	      email, pass
       }),
       headers: {
-	'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+	      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       }
     });
 
@@ -38,7 +29,8 @@ export const startLogin = (email, pass)=>{
       localStorage.setItem("nicostore-token", jsonRes.token);
       localStorage.setItem("nicostore-user", JSON.stringify(jsonRes.user));
 
-      Swal.close();
+      Swal.close();      
+      window.location.href = "http://localhost:3000/home";
     }
   }
 }
@@ -53,6 +45,9 @@ export const setLoginData = (userData, token)=>({
 
 export const startLogout = ()=>{
   return (dispatch)=>{
+    
+    localStorage.removeItem("nicostore-token");
+    localStorage.removeItem("nicostore-user");
     dispatch( setLogout() );
   }
 }

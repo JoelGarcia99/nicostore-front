@@ -27,15 +27,16 @@ export const startLogin = (email, pass)=>{
 
     if(!jsonRes.ok) {
       Swal.fire({
-	title: "No se pudo iniciar sesión",
-	text: jsonRes.mensaje,
-	onClose: ()=>Swal.close()
+        title: "No se pudo iniciar sesión",
+        text: jsonRes.mensaje,
+        onClose: ()=>Swal.close()
       });
     }
     else{
       dispatch( setLoginData(jsonRes.user, jsonRes.token) );
 
       localStorage.setItem("nicostore-token", jsonRes.token);
+      localStorage.setItem("nicostore-user", JSON.stringify(jsonRes.user));
 
       Swal.close();
     }

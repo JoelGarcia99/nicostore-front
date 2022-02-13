@@ -3,6 +3,7 @@ const types = {
   register: "[auth] register",
   logout: "[auth] logout",
   fetchPro: "[products] fetch",
+  addPro: "[products] add",
 }
 
 export default types;

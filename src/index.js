@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import RouterComponent from './router/router';
 
 import {store} from './redux/store/store';
 
 import './components/home/home.scss';
-import RouterComponent from './router/router';
+import './components/products/products.scss';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <Provider store={store}>
-    <RouterComponent />
+    
+    <BrowserRouter>
+      <RouterComponent />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

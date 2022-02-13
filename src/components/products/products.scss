@@ -1,0 +1,161 @@
+.product-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.product-list .product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    box-shadow: 3px 3px 10px gray;
+    width: 15rem;
+    height: 21rem;
+
+}
+.product-list .product > span{
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-lines: 1;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.product-list .image {
+    display: flex;
+    width: 100%;
+    height: 13rem;
+
+    &image {
+        object-fit: cover;
+        max-height: 100%;
+    }
+}
+
+.product-list button {
+    display: block;
+    padding: 0.3rem;
+    border-radius: 1rem;
+    border: 1px solid indigo;
+    cursor: pointer;
+}
+
+.product-list button:first-child {
+    width: 80%;
+}
+
+.header-opt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    color: white;
+    background-color: #012030;
+    padding: 0.5rem;
+}
+.header-opt .logo {
+    display: block;
+    font-size: 24px;
+    margin: 0 1rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header-opt .menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.menu ol {
+    display: flex;
+}
+
+.header-opt .menu a {
+    color: white;
+    padding: 0  0.5rem;
+    margin: 0 1rem;
+    border-bottom: 1px solid transparent;
+    text-decoration: none;
+}
+
+.activenode {
+    border-bottom: 2px solid white !important;
+}
+
+////////////// ADMIN////////////////
+
+.admin-pane form {
+    display: flex;
+    width: min-content;
+    align-self: center;
+    flex-direction: column;
+    justify-content: start;
+    align-items: left;
+    padding: 2rem 3rem;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: 5px 5px 10px gray;
+}
+
+.admin-pane >h1 {
+    text-align: center;
+    align-self: center;
+}
+
+.admin-pane input {
+    display: block;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 2px solid #012030;
+    margin-bottom: 0.5rem;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.admin-pane textarea {
+    height: 10rem;
+    width: 100%;
+    min-height: 3rem;
+    resize: none;
+}
+
+.admin-pane .extra-input {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.admin-pane .form input[type="submit"] {
+    margin: 1rem;
+    width: min-content;
+    align-self: center;
+    border: none;
+    background-color: #012030;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

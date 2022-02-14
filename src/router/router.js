@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AdminScreen from '../components/admin/Admin';
-import EditProduct from '../components/admin/EditProd';
 import CarritoScreen from '../components/carrito/CarritoScreen';
 import HomeScreen from '../components/home/HomeScreen';
 import LoginScreen from '../components/home/LoginScreen';
@@ -12,7 +11,6 @@ import { setLoginData, startLogout } from '../redux/actions/auth';
 const privateRoutes = {
   home: "/home",
   admin: "/admin",
-  edit: "/edit",
   cart: "/cart"
 }
 
@@ -61,7 +59,6 @@ const RouterComponent = ()=>{
         <Route exact path={publicRoutes.login} element={<LoginScreen />} />
         <Route exact path={privateRoutes.admin} element={<AdminScreen />} />
         <Route exact path={privateRoutes.home} element={<HomeScreen />} />
-        <Route exact path={privateRoutes.edit} element={<EditProduct />} />
         <Route exact path={privateRoutes.cart} element={<CarritoScreen />} />
         <Route exact path={publicRoutes.register} element={<RegisterScreen />} />
       </Routes>

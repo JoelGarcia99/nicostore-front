@@ -15,7 +15,7 @@ const ProdHeaderComponent = ()=>{
   return (
     <div className="header-opt">
       <NavLink to="/home" className="logo">
-	    Nicole
+	      Gramor design
       </NavLink>
       <nav className='menu'>
           <ol>

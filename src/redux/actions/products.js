@@ -45,24 +45,95 @@ export const setProducts = (products) => ({
     }
 });
 
-export const addProduct = async({product, token})=>{
+export const updateProduct = async({product, token})=>{
+
+    let prod = {...product};
 
     const valor = {
-        valor: product.valor,
+        valor: prod.valor,
     };
-    delete product.valor;
-    delete product.undefined;
+    delete prod.__id;
+    delete prod.undefined;
+    delete prod.valor;
+    delete prod.id_precio;
+    delete prod.id_producto;
 
     // tratando imagen
     let reader = new FormData();
 
-    for(let key in product) {
+    for(let key in prod) {
         if(valor === 'imagen') continue;
-        reader.append(key, product[key]);
+        reader.append(key, prod[key]);
     }
 
-    if(product.imagen && product.imagen.files?.length > 0) {
-        reader.append('imagen', product.imagen.files[0]);
+    if(prod.imagen && prod.imagen.files?.length > 0) {
+        reader.append('imagen', prod.imagen.files[0]);
+    }
+
+    const res = await fetch(`http://localhost:8500/producto/${product.__id}`, {
+      method: 'PUT',
+      body: reader,
+      headers: {
+        'auth': token
+      }
+    });
+
+    // recuperando valores en caso de error
+    prod.valor = valor.valor;
+
+    //TODO: purgar producto en caso de error
+
+    let jsonRes = await res.json();
+    
+    if(!jsonRes.ok) {
+        Swal.fire({
+            title: jsonRes.mensaje,
+            text: jsonRes.error.error,
+            onClose: ()=>Swal.close()
+        });
+        return {};
+    }
+    else {
+        let res = await addPrice({
+            precio: {
+                valor: valor.valor,
+                id_producto: product.__id
+            },
+            token
+        })
+
+        if(res.ok) {
+
+        }
+    }
+
+    return jsonRes;
+}
+
+export const addProduct = async({product, token})=>{
+
+    let prod = {...product};
+
+    const valor = {
+        valor: prod.valor,
+    };
+    delete prod.__id;
+    delete prod.imagen_url;
+    delete prod.undefined;
+    delete prod.valor;
+    delete prod.id_precio;
+    delete prod.id_producto;
+
+    // tratando imagen
+    let reader = new FormData();
+
+    for(let key in prod) {
+        if(valor === 'imagen') continue;
+        reader.append(key, prod[key]);
+    }
+
+    if(prod.imagen && prod.imagen.files?.length > 0) {
+        reader.append('imagen', prod.imagen.files[0]);
     }
 
     const res = await fetch(`http://localhost:8500/producto`, {
@@ -74,18 +145,16 @@ export const addProduct = async({product, token})=>{
     });
 
     // recuperando valores en caso de error
-    product.valor = valor.valor;
+    prod.valor = valor.valor;
 
     //TODO: purgar producto en caso de error
-
-
 
     let jsonRes = await res.json();
     
     if(!jsonRes.ok) {
         Swal.fire({
             title: jsonRes.mensaje,
-            text: JSON.stringify(jsonRes.error),
+            text: jsonRes.error.error,
             onClose: ()=>Swal.close()
         });
         return {};

@@ -86,7 +86,7 @@
 }
 .header-opt .logo {
     display: block;
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 1rem;
     font-weight: bold;
     color: white;
@@ -137,8 +137,6 @@
     padding: 2rem 3rem;
     margin: 2rem auto;
     background-color: white;
-    border-radius: 2rem;
-    box-shadow: 5px 5px 10px gray;
 }
 
 .admin-pane >h1 {
@@ -146,7 +144,7 @@
     align-self: center;
 }
 
-.admin-pane input {
+.form input {
     display: block;
     padding: 0.5rem;
     border: none;
@@ -172,7 +170,7 @@
     align-items: center;
 }
 
-.admin-pane .form input[type="submit"] {
+.form input[type="submit"] {
     margin: 1rem;
     width: min-content;
     align-self: center;

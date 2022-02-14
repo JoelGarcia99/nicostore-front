@@ -2,6 +2,7 @@ import React from 'react';
 import useCustomForm from '../../hooks/useCustomForm';
 import {useDispatch} from 'react-redux';
 import {startLogin} from '../../redux/actions/auth';
+import Footer from './Footer';
 // user@root.com
 // U53r.r00t
 const LoginScreen = ()=>{
@@ -22,7 +23,7 @@ const LoginScreen = ()=>{
   return (
     <div className="main-cont">
       <div className="login-form">
-	<h1>Nicole Store</h1>
+	<h1>Gramor Design</h1>
 	<form onSubmit={handleLogin}>
     <label htmlFor="email">Email</label>
     <input 
@@ -52,6 +53,7 @@ const LoginScreen = ()=>{
     >Registrarse</button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

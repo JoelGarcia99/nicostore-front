@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startFetching } from '../../redux/actions/products';
 import ProductCard from './ProductCard';
 
-const ProductList = ()=>{
+const ProductList = ({customProd})=>{
     
     const {products, isLoading} = useSelector(state=>state.prod);
     const dispatch = useDispatch();
@@ -13,18 +13,18 @@ const ProductList = ()=>{
     }, []);
 
 
-    if(isLoading) {
+    if(isLoading && !customProd) {
         return <h1>Loading...</h1>;
     }
 
-    if(products.length === 0) {
+    if(!customProd && products?.length === 0) {
         return <center><h2>No hay productos</h2></center>
     }
 
     return (
         <div className="product-list">
             {
-                products.map((product, index)=>{
+                (customProd || products).map((product, index)=>{
                     return <div
                         key={product["__id"]}
                     >

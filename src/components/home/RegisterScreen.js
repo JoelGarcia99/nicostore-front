@@ -3,6 +3,7 @@ import useCustomForm from '../../hooks/useCustomForm';
 import {useDispatch} from 'react-redux';
 import {startLogin} from '../../redux/actions/auth';
 import Swal from 'sweetalert2';
+import Footer from './Footer';
 // user@root.com
 // U53r.r00t
 const RegisterScreen = ()=>{
@@ -35,7 +36,7 @@ const RegisterScreen = ()=>{
     if(!jsonRes.ok) {
       Swal.fire({
         title: "No se pudo iniciar sesión",
-        text: jsonRes.error.sqlMessage,
+        text: jsonRes.error.sqlMessage || `${jsonRes.error}. La contraseña debe tener mayúsculas, minúsculas, números, y caracteres.`,
         onClose: ()=>Swal.close()
       });
     }
@@ -53,7 +54,7 @@ const RegisterScreen = ()=>{
   return (
     <div className="main-cont">
       <div className="login-form">
-	<h1>Nicole Store</h1>
+	<h1>Gramor Design</h1>
 	<form onSubmit={handleLogin}>
     <label htmlFor="email">Email</label>
     <input 
@@ -102,6 +103,7 @@ const RegisterScreen = ()=>{
         >Iniciar sesión</button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

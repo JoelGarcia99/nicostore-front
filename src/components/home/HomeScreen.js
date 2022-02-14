@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCarrito } from '../../redux/actions/carrito';
 import ProductList from '../products/productComponent';
+import Footer from './Footer';
 import HeaderComponent from './header';
 
 const HomeScreen = ()=>{
@@ -16,6 +17,7 @@ const HomeScreen = ()=>{
   return <div>
     <HeaderComponent />
     <ProductList />
+    <Footer />
   </div>
 }
 

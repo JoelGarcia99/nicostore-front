@@ -9,10 +9,11 @@
 
 .main-cont {
   display: flex;
+  flex-direction: column;
   justify-content:  center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  padding: 2rem 0 0 0;
   overflow: hidden;
   text-align: center;
   color: white;
@@ -29,6 +30,7 @@
   background-color: #012E40;
   box-shadow: 2px 2px 10px black;
   border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .login-form form {
@@ -132,7 +134,7 @@ div.header {
 
 .header>.logo {
   display: block;
-  font-size: 24px;
+  font-size: 20px;
   margin: 0 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -183,4 +185,12 @@ div.header {
   outline: none;
   border: 1px solid blue;
   cursor: pointer;
+}
+
+.search-res {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid gray;
+  background-color: lighten($color: gray, $amount: 40);
 }

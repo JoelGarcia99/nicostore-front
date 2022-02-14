@@ -1,18 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import {
-  faCartPlus
+  faCartPlus,
+  faPen
 } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemCarrito } from '../../redux/actions/carrito';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import EditForm from '../admin/editForm';
 
-const ProductCard = ({prod, showCart=true})=>{
+const ProductCard = ({ prod, showCart=true })=>{
 
     const dispatch = useDispatch();
+    const {user, token} = useSelector(state=>state.auth);
+
+    
+    // Add JSX support for SweetAlert2
+    const MySwal = withReactContent(Swal);
 
     const handleClick = ()=>{
         dispatch( addItemCarrito(prod) );
+    }
+
+    const handleEdit = ()=>{
+        MySwal.fire({
+            title: 'Editar producto',
+            html: <EditForm 
+                initS={
+                    {...prod}
+                }
+                isEditing={true}
+                token={token}
+            />,
+            showCancelButton: false,
+            showCloseButton: false,
+            showConfirmButton: false
+        });
     }
 
     return (
@@ -29,7 +53,7 @@ const ProductCard = ({prod, showCart=true})=>{
                />
             </div>
             <span className="price">
-                A tan solo <b>{`\$${prod['valor'] || '0.00'}`}</b>
+                A tan solo <b>{`\$${Number(prod['valor'])?.toFixed(2) || '0.00'}`}</b>
             </span>
             {/* <small className="stock">
                 {`${prod['stock'] || '0'}`} en stock
@@ -38,19 +62,29 @@ const ProductCard = ({prod, showCart=true})=>{
                 <button
                     onClick={()=>{
                         Swal.fire({
-                            title: "Detalles del producto "+prod.nombre,
+                            title: prod.nombre,
                             text: prod.descripcion,
                             onClose: ()=>Swal.close()
                           });
                     }}
                 >Ver detalles</button>
                 {
+                    showCart && JSON.parse(user).es_admin === 1 &&
+                    <a
+                        onClick={handleEdit}
+                    >
+                        <FontAwesomeIcon icon={faPen} />
+                    </a>
+                }
+                {
                     showCart &&
+                    <>
                     <a
                         onClick={handleClick}            
                     >
                         <FontAwesomeIcon icon={faCartPlus} />
                     </a>
+                    </>
                 }
             </div>
         </div>

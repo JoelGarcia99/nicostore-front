@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   faGear,
@@ -9,30 +9,90 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../redux/actions/auth';
+import Swal from 'sweetalert2';
+import ProductList from '../products/productComponent';
 
 const HeaderComponent = ()=>{
 
   const navigator = useNavigate();
+  const [search, setSearch] = useState('')
+  const [prod, setProd] = useState([]);
   const dispatch = useDispatch();
 
-  const {user} = useSelector(state=>state.auth);
+  const {user, token} = useSelector(state=>state.auth);
 
   const handleOptClick = ()=>{
     return navigator("/admin");
   }
+  
+
+  const handleSearch = ()=>{
+
+    setSearch(search.trim());
+
+    if(search.trim().length === 0) {
+      setProd([]);
+      return;
+    }
+
+    fetch(`http://localhost:8500/producto/search?q=${search.trim()}`, {
+      method: 'GET',
+      headers: {
+        auth: token
+      }
+    }).then(async(response)=>{
+      const jsonRes = await response.json();
+
+      if(!jsonRes.ok) {
+        Swal.fire({
+          title: jsonRes.mensaje,
+          text: jsonRes.error.sqlMessage
+        });
+        return;
+      }
+
+      // const salida = <div>{jsonRes.output.map(prod=><ProductCard prod={prod} />)}</div>;
+
+      setProd(jsonRes.output)
+
+      if(jsonRes.output.length === 0) {
+        Swal.fire({
+          title: jsonRes.mensaje,
+          text: "No se encontraron productos con el criterio de búsqueda"
+        });
+      }
+      // console.log(salida);
+
+      // MySwal.fire({
+      //   title: 'Resultados de búsqueda',
+      //   html: jsonRes.output.length === 0?
+      //     '<center>No se encontraron resultados</center>':
+      //     salida
+      // });
+    })
+
+    
+  }
 
   return (
+    <>
     <div className="header">
       <NavLink to="/home" className="logo">
-	      Nicole
+        Gramor design
       </NavLink>
       <div className="search">
         <input 
+          value={search}
+          onChange={(e)=>setSearch(e.target.value)}
           type="text" 
           placeholder="Busque algo"
         />
         <div className="opt">
-          <button><FontAwesomeIcon icon={faMagnifyingGlass}/>&nbsp;Buscar</button>
+          <button
+            onClick={handleSearch}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass}/>&nbsp;Buscar
+          </button>
         </div>
       </div>
       <div className="trailing">
@@ -63,6 +123,15 @@ const HeaderComponent = ()=>{
         }
       </div>
     </div>
+    { prod && prod.length !== 0 &&
+      <div className="search-res">
+        <center>
+          <b>Resultados de búsqueda</b>
+        </center>
+        <ProductList customProd={prod} />    
+      </div>
+    }
+    </>
   )
 }
 

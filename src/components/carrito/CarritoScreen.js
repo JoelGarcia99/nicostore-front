@@ -11,9 +11,8 @@ const CarritoScreen = ()=>{
         cargando: true,
     });
 
-    const {token} = useSelector(state=>state.auth);
     const {__id:carrito_id} = useSelector(state=>state.cart);
-    let {user} = useSelector(state=>state.auth);
+    let {user, token} = useSelector(state=>state.auth)
 
     user = JSON.parse(user);
   useEffect(()=>{
